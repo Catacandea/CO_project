@@ -101,22 +101,29 @@ public class PrimaryController implements Initializable {
 
     }
 
-    public void SeeResults()
-    {
-        System.out.println(getStringPartition());
-        System.out.println(getStringSize());
-    }
-
     @FXML
     private Label sizeLabel, partitionLabel;
 
-    @FXML
-    public void switchSec() throws IOException{
-        //App.setRoot("secondary");
-        System.out.println(getStringPartition());
-        System.out.println(getStringSize());
+    public void SeeResults()
+    {
+        stringPartition = partition.getValue();
+        stringSize = size.getValue();
 
         sizeLabel.setText(getStringPartition());
         partitionLabel.setText( Integer.toString(getStringSize()) );
+
+        System.out.println(getStringPartition());
+        System.out.println(getStringSize());
     }
+
+
+//    @FXML
+//    public void switchSec() throws IOException{
+        //App.setRoot("secondary");
+//        System.out.println(getStringPartition());
+//        System.out.println(getStringSize());
+//
+//        sizeLabel.setText(getStringPartition());
+//        partitionLabel.setText( Integer.toString(getStringSize()) );
+   // }
 }
