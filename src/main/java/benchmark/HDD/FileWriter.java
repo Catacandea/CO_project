@@ -51,7 +51,7 @@ public class FileWriter {
 		benchScore /= (maxIndex - minIndex + 1);
 
 		if (folderPath.isDirectory())
-			folderPath.delete();
+			folderPath.deleteOnExit();
 		return String.format("%.2f", benchScore);
 	}
 
@@ -81,7 +81,7 @@ public class FileWriter {
 		benchScore /= (maxIndex - minIndex + 1);
 
 		if (folderPath.isDirectory())
-			folderPath.delete();
+			folderPath.deleteOnExit();
 		return String.format("%.2f", benchScore);
 	}
 
@@ -119,7 +119,7 @@ public class FileWriter {
 
 		outputStream.close();
 		if (clean) {
-			new File(fileName).delete();
+			new File(fileName).deleteOnExit();
 		}
 	}
 

@@ -2,7 +2,7 @@ package com.benchmark;
 
 import java.io.IOException;
 
-import benchmark.HDD.HDDWriteSpeed;
+import benchmark.HDD.HDDRandomAccess;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,10 +34,25 @@ public class App extends Application {
 
 	public static void main(String[] args) {
 		// launch();
-		HDDWriteSpeed hws = new HDDWriteSpeed();
-		hws.initialize();
-		hws.warmUp();
-		System.out.println(hws.run("fs", false, 1000, 'C'));
+
+		/*
+		 * HDDWriteSpeed hws = new HDDWriteSpeed(); hws.initialize(); hws.warmUp();
+		 * 
+		 * System.out.println(hws.run("fs", false, 1000, 'C'));
+		 * 
+		 */ HDDRandomAccess hra = new HDDRandomAccess();
+
+		hra.initialize(1024 * 1024, 'D');
+		try {
+			hra.warmUp();
+			System.out.println(hra.run("r", "fs", 40 * 1024));
+			System.out.println(hra.run("r", "ft", 40 * 1024));
+			System.out.println(hra.run("w", "fs", 40 * 1024));
+			System.out.println(hra.run("w", "ft", 40 * 1024));
+			hra.clean();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
