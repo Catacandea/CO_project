@@ -52,14 +52,18 @@ public class PrimaryController implements Initializable {
 
     private Task copyWorker;
 
+
     @FXML
     private void Run() {
+
         progressBar.setProgress(0.0);
         copyWorker = createWorker();
+
         progressBar.progressProperty().unbind();
         progressBar.progressProperty().bind(copyWorker.progressProperty());
         copyWorker.messageProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
         copyWorker.messageProperty().addListener((observable, oldValue, newValue) -> label.setText(newValue));
+
         new Thread(copyWorker).start();
 
         stringPartition = partition.getValue();
@@ -67,6 +71,8 @@ public class PrimaryController implements Initializable {
 
         System.out.println(stringPartition);
         System.out.println(stringSize);
+
+        //AlertBox.display("Cfff", "bnnn");
 
     }
 
@@ -81,6 +87,10 @@ public class PrimaryController implements Initializable {
         size.getSelectionModel().select("500 MB");
     }
 
+    public void bla(){
+        AlertBox.display("Cfff", "bnnn");
+    }
+
     public Task createWorker() {
 
         return new Task() {
@@ -90,15 +100,15 @@ public class PrimaryController implements Initializable {
                 for (int i = 0; i <= 100; i++) {
                    if(i == 0)
                        Thread.sleep(1000);
-                    Thread.sleep(100);
-                    updateMessage("Task Completed : " + (i) + "%");
-                    updateProgress(i, 100);
+                       // Thread.sleep(100);
+                       Thread.sleep(10);
+                       updateMessage("Task Completed : " + (i) + "%");
+                       updateProgress(i, 100);
+
                 }
                 return true;
             }
-
         };
-
     }
 
     @FXML
@@ -114,6 +124,7 @@ public class PrimaryController implements Initializable {
 
         System.out.println(getStringPartition());
         System.out.println(getStringSize());
+        //AlertBox.display("Cf","bn");
     }
 
 
