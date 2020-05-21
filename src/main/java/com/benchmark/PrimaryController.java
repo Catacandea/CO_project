@@ -1,6 +1,5 @@
 package com.benchmark;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
@@ -56,6 +55,8 @@ public class PrimaryController implements Initializable {
 			intSize = 50;
 		} else if (stringSize.equals("100 MB")) {
 			intSize = 100;
+		} else if (stringSize.equals("250 MB")) {
+			intSize = 250;
 		}
 
 		return intSize;
@@ -85,8 +86,6 @@ public class PrimaryController implements Initializable {
 
 	@FXML
 	private void Run() {
-
-
 
 		progressBar.setProgress(0.0);
 		copyWorker = createWorker();
@@ -169,7 +168,6 @@ public class PrimaryController implements Initializable {
 			e.printStackTrace();
 		}
 
-
 		System.out.println(tempPartition);
 		System.out.println(tempSize);
 
@@ -182,7 +180,7 @@ public class PrimaryController implements Initializable {
 		partition.getSelectionModel().select("C:\\");
 
 		size.getItems().removeAll(size.getItems());
-		size.getItems().addAll("20 MB", "50 MB", "100 MB");
+		size.getItems().addAll("20 MB", "50 MB", "100 MB", "250 MB");
 		size.getSelectionModel().select("20 MB");
 	}
 
