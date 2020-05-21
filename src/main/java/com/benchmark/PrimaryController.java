@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
@@ -72,7 +74,12 @@ public class PrimaryController implements Initializable {
         System.out.println(stringPartition);
         System.out.println(stringSize);
 
-        //AlertBox.display("Cfff", "bnnn");
+        copyWorker.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent workerStateEvent) {
+                AlertBox.display("Cfff", "bnnn");
+            }
+        });
 
     }
 
@@ -87,9 +94,6 @@ public class PrimaryController implements Initializable {
         size.getSelectionModel().select("500 MB");
     }
 
-    public void bla(){
-        AlertBox.display("Cfff", "bnnn");
-    }
 
     public Task createWorker() {
 
