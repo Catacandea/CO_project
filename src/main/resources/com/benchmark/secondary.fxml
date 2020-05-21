@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
@@ -10,13 +11,30 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.geometry.Insets?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.benchmark.SecondaryController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="bodybg" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.benchmark.SecondaryController">
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="sizeLabel" layoutX="112.0" layoutY="42.0" />
-            <Label fx:id="partitionLabel" layoutX="318.0" layoutY="42.0" />
-            <Text layoutX="66.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Results ..." />
+            <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Century Gothic;" text="Results ..." />
+            <Text fill="#08175b" fontSmoothingType="LCD" layoutX="322.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Read">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Text>
+            <Text fill="#08175b" fontSmoothingType="LCD" layoutX="421.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Write">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#08175b" fontSmoothingType="LCD" layoutX="250.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SEQ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#08175b" fontSmoothingType="LCD" layoutX="250.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RND">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </center>
