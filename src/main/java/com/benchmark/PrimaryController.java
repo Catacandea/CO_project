@@ -54,7 +54,6 @@ public class PrimaryController implements Initializable {
 
     private Task copyWorker;
 
-
     @FXML
     private void Run() {
 
@@ -77,7 +76,11 @@ public class PrimaryController implements Initializable {
         copyWorker.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent workerStateEvent) {
-                AlertBox.display("Cfff", "bnnn");
+                try {
+                    AlertBox.display("Finished", "Do you want to see the result?");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
