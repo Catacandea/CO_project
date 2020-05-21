@@ -2,7 +2,11 @@ package com.benchmark;
 
 import java.io.IOException;
 
-import benchmark.HDD.HDDRandomAccess;
+import benchmark.HDD.HDDRandReadSpeed;
+import benchmark.HDD.HDDRandWriteSpeed;
+import benchmark.HDD.HDDSeqReadSpeed;
+import benchmark.HDD.HDDSeqWriteSpeed;
+import benchmark.HDD.IBenchmark;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,25 +38,46 @@ public class App extends Application {
 
 	public static void main(String[] args) {
 		// launch();
+		IBenchmark seqWrite = new HDDSeqWriteSpeed();
+		IBenchmark seqRead = new HDDSeqReadSpeed();
 
-		/*
-		 * HDDWriteSpeed hws = new HDDWriteSpeed(); hws.initialize(); hws.warmUp();
-		 * 
-		 * System.out.println(hws.run("fs", false, 1000, 'C'));
-		 * 
-		 */ HDDRandomAccess hra = new HDDRandomAccess();
-
-		hra.initialize(1024 * 1024, 'D');
 		try {
-			hra.warmUp();
-			System.out.println(hra.run("r", "fs", 40 * 1024));
-			System.out.println(hra.run("r", "ft", 40 * 1024));
-			System.out.println(hra.run("w", "fs", 40 * 1024));
-			System.out.println(hra.run("w", "ft", 40 * 1024));
-			hra.clean();
+			seqWrite.initialize("D", 400L);
+			seqWrite.warmUp();
+			seqWrite.run();
+
+			System.out.println(seqWrite.getResult());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			seqRead.initialize("D", 400L);
+			seqRead.warmUp();
+			seqRead.run();
+
+			System.out.println(seqRead.getResult());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		IBenchmark randWrite = new HDDRandWriteSpeed();
+		IBenchmark randRead = new HDDRandReadSpeed();
+		try {
+			randWrite.initialize("D", 50L);
+			randWrite.warmUp();
+			randWrite.run();
+
+			System.out.println(randWrite.getResult());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			randRead.initialize("D", 50L);
+			randRead.warmUp();
+			randRead.run();
+
+			System.out.println(randRead.getResult());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
 }

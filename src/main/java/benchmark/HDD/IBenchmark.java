@@ -1,11 +1,14 @@
 package benchmark.HDD;
 
+import java.io.IOException;
+
 public interface IBenchmark {
-	void initialize(Object... parameters);
+	void initialize(Object... parameters) throws IOException;
 
-	String run(Object... parameters); // we can pass any parameter and as many as we want
+	void run(Object... parameters) throws IOException; // we can pass any parameter and as many
+														// as we want
 
-	void clean();
+	void warmUp(Object... params) throws IOException;
 
-	void cancel();
+	String getResult();
 }
