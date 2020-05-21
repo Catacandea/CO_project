@@ -38,46 +38,5 @@ public class App extends Application {
 
 	public static void main(String[] args) {
 		launch();
-		IBenchmark seqWrite = new HDDSeqWriteSpeed();
-		IBenchmark seqRead = new HDDSeqReadSpeed();
-
-		try {
-			seqWrite.initialize("D", 400L);
-			seqWrite.warmUp();
-			seqWrite.run();
-
-			System.out.println(seqWrite.getResult());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			seqRead.initialize("D", 400L);
-			seqRead.warmUp();
-			seqRead.run();
-
-			System.out.println(seqRead.getResult());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		IBenchmark randWrite = new HDDRandWriteSpeed();
-		IBenchmark randRead = new HDDRandReadSpeed();
-		try {
-			randWrite.initialize("D", 50L);
-			randWrite.warmUp();
-			randWrite.run();
-
-			System.out.println(randWrite.getResult());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			randRead.initialize("D", 50L);
-			randRead.warmUp();
-			randRead.run();
-
-			System.out.println(randRead.getResult());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 }

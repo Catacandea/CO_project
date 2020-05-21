@@ -23,7 +23,7 @@ public class AlertBox {
         Label label1 =  new Label();
         label1.setText(message);
 
-        Button closeButton = new Button("Ok");
+        Button closeButton = new Button("See Results");
         closeButton.setOnAction(e-> {
             window.close();
                     try {

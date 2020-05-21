@@ -15,12 +15,24 @@
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <ProgressBar fx:id="progressBar" layoutX="266.0" layoutY="180.0" prefWidth="200.0" progress="0.0" style="-fx-background-color: #4c0080;" />
-            <Button fx:id="runButton" layoutX="342.0" layoutY="250.0" mnemonicParsing="false" onAction="#Run" style="-fx-font-family: Century Gothic;" text="Run" />
-            <Label fx:id="label" layoutX="265.0" layoutY="211.0" prefHeight="21.0" prefWidth="203.0" style="-fx-font-family: Century Gothic;" textAlignment="CENTER" />
+            <Button fx:id="runButton" layoutX="342.0" layoutY="250.0" mnemonicParsing="false" onAction="#Run" style="-fx-background-color: TRANSPARENT;" text="RUN" textFill="#08175b">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
+            <Label fx:id="label" layoutX="265.0" layoutY="203.0" prefHeight="21.0" prefWidth="203.0" textAlignment="CENTER" textFill="#08175b">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font></Label>
             <ChoiceBox fx:id="size" layoutX="317.0" layoutY="47.0" prefHeight="31.0" prefWidth="95.0" />
             <ChoiceBox fx:id="partition" layoutX="320.0" layoutY="118.0" prefHeight="31.0" prefWidth="90.0" />
-            <Text layoutX="317.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select the size" wrappingWidth="98.3154296875" />
-            <Text layoutX="300.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select the partition" wrappingWidth="132.06591796875" />
+            <Text fill="#08175b" fontSmoothingType="LCD" layoutX="303.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELECT THE SIZE" wrappingWidth="124.3154296875">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Text>
+            <Text fill="#08175b" fontSmoothingType="LCD" layoutX="283.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELECT THE PARTITION" wrappingWidth="171.06591796875">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Text>
          </children>
       </AnchorPane>
    </center>
@@ -33,7 +45,4 @@
    <left>
       <AnchorPane prefHeight="298.0" prefWidth="50.0" BorderPane.alignment="CENTER" />
    </left>
-   <right>
-      <AnchorPane prefHeight="298.0" prefWidth="50.0" BorderPane.alignment="CENTER" />
-   </right>
 </BorderPane>

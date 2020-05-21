@@ -1,5 +1,7 @@
 package com.benchmark;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,23 +23,39 @@ import javafx.scene.control.ProgressBar;
 public class PrimaryController implements Initializable {
 
 	private String stringSize, stringPartition;
+
 	private String seqWriteResult;
 	private String seqReadResult;
 	private String randWriteResult;
 	private String randReadResult;
-	private int intSize;
+
+	public String getSeqWriteResult() {
+		return seqWriteResult;
+	}
+
+	public String getSeqReadResult() {
+		return seqReadResult;
+	}
+
+	public String getRandWriteResult() {
+		return randWriteResult;
+	}
+
+	public String getRandReadResult() {
+		return randReadResult;
+	}
+
+	private long intSize;
 	private String partitionString;
 
-	public int getStringSize() {
+	public long getStringSize() {
 
-		if (stringSize.equals("500 MB")) {
-			intSize = 500;
-		} else if (stringSize.equals("1 GB")) {
-			intSize = 1024;
-		} else if (stringSize.equals("5 GB")) {
-			intSize = 5120;
-		} else {
-			intSize = 10240;
+		if (stringSize.equals("20 MB")) {
+			intSize = 20;
+		} else if (stringSize.equals("50 MB")) {
+			intSize = 50;
+		} else if (stringSize.equals("100 MB")) {
+			intSize = 100;
 		}
 
 		return intSize;
@@ -51,6 +69,8 @@ public class PrimaryController implements Initializable {
 		}
 		return partitionString;
 	}
+
+	HDDSeqWriteSpeed hs = new HDDSeqWriteSpeed();
 
 	@FXML
 	private ProgressBar progressBar;
@@ -66,6 +86,8 @@ public class PrimaryController implements Initializable {
 	@FXML
 	private void Run() {
 
+
+
 		progressBar.setProgress(0.0);
 		copyWorker = createWorker();
 
@@ -74,19 +96,33 @@ public class PrimaryController implements Initializable {
 		copyWorker.messageProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
 		copyWorker.messageProperty().addListener((observable, oldValue, newValue) -> label.setText(newValue));
 
+		copyWorker.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+			@Override
+			public void handle(WorkerStateEvent workerStateEvent) {
+				try {
+					AlertBox.display("Finished", "Press the button to see the results");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
 		new Thread(copyWorker).start();
 
 		stringPartition = partition.getValue();
 		stringSize = size.getValue();
 
-		getStringPartition();
-		String size = Integer.toString(getStringSize());
+		long tempSize = getStringSize();
+		String tempPartition = getStringPartition();
+
+		System.out.println(tempPartition);
+		System.out.println(tempSize);
 
 		IBenchmark seqWrite = new HDDSeqWriteSpeed();
 		IBenchmark seqRead = new HDDSeqReadSpeed();
 
 		try {
-			seqWrite.initialize(stringPartition, stringSize);
+			seqWrite.initialize(tempPartition, tempSize);
 			seqWrite.warmUp();
 			seqWrite.run();
 
@@ -95,7 +131,7 @@ public class PrimaryController implements Initializable {
 			e.printStackTrace();
 		}
 		try {
-			seqRead.initialize(stringPartition, stringSize);
+			seqRead.initialize(tempPartition, tempSize);
 			seqRead.warmUp();
 			seqRead.run();
 
@@ -106,7 +142,7 @@ public class PrimaryController implements Initializable {
 		IBenchmark randWrite = new HDDRandWriteSpeed();
 		IBenchmark randRead = new HDDRandReadSpeed();
 		try {
-			randWrite.initialize("D", 50L);
+			randWrite.initialize(tempPartition, tempSize);
 			randWrite.warmUp();
 			randWrite.run();
 
@@ -115,7 +151,7 @@ public class PrimaryController implements Initializable {
 			e.printStackTrace();
 		}
 		try {
-			randRead.initialize("D", 50L);
+			randRead.initialize(tempPartition, tempSize);
 			randRead.warmUp();
 			randRead.run();
 
@@ -124,19 +160,18 @@ public class PrimaryController implements Initializable {
 			e.printStackTrace();
 		}
 
-		System.out.println(stringPartition);
-		System.out.println(stringSize);
+		try {
+			FileWriter myWriter = new FileWriter("results.txt");
+			myWriter.write(seqReadResult + "\n" + seqWriteResult + "\n" + randReadResult + "\n" + randWriteResult);
+			myWriter.close();
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
 
-		copyWorker.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-			@Override
-			public void handle(WorkerStateEvent workerStateEvent) {
-				try {
-					AlertBox.display("Finished", "Do you want to see the result?");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		});
+
+		System.out.println(tempPartition);
+		System.out.println(tempSize);
 
 	}
 
@@ -147,8 +182,8 @@ public class PrimaryController implements Initializable {
 		partition.getSelectionModel().select("C:\\");
 
 		size.getItems().removeAll(size.getItems());
-		size.getItems().addAll("500 MB", "1 GB", "5 GB", "10 GB");
-		size.getSelectionModel().select("500 MB");
+		size.getItems().addAll("20 MB", "50 MB", "100 MB");
+		size.getSelectionModel().select("20 MB");
 	}
 
 	public Task createWorker() {
@@ -161,7 +196,7 @@ public class PrimaryController implements Initializable {
 					if (i == 0)
 						Thread.sleep(1000);
 					// Thread.sleep(100);
-					Thread.sleep(10);
+					Thread.sleep(50);
 					updateMessage("Task Completed : " + (i) + "%");
 					updateProgress(i, 100);
 
@@ -171,28 +206,4 @@ public class PrimaryController implements Initializable {
 		};
 	}
 
-	@FXML
-	private Label sizeLabel, partitionLabel;
-
-	public void SeeResults() {
-		stringPartition = partition.getValue();
-		stringSize = size.getValue();
-
-		sizeLabel.setText(getStringPartition());
-		partitionLabel.setText(Integer.toString(getStringSize()));
-
-		System.out.println(getStringPartition());
-		System.out.println(getStringSize());
-		// AlertBox.display("Cf","bn");
-	}
-
-//    @FXML
-//    public void switchSec() throws IOException{
-	// App.setRoot("secondary");
-//        System.out.println(getStringPartition());
-//        System.out.println(getStringSize());
-//
-//        sizeLabel.setText(getStringPartition());
-//        partitionLabel.setText( Integer.toString(getStringSize()) );
-	// }
 }

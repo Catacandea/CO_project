@@ -76,6 +76,8 @@ public class HDDSeqWriteSpeed implements IBenchmark {
 		}
 	}
 
+
+
 	private void writeInFile(String fileName, int myBufferSize) throws IOException {
 
 		File folderPath = new File(fileName.substring(0, fileName.lastIndexOf(File.separator)));
@@ -111,9 +113,13 @@ public class HDDSeqWriteSpeed implements IBenchmark {
 		double megabytes = (double) (fileSize) / (1024 * 1024);
 		double rate = megabytes / seconds;
 		System.out.println(megabytes + "MB were written to " + fileName + " in " + seconds + " seconds");
+
+
+
 		System.out.println("rate: " + rate);
 		writeSpeed += rate;
 	}
+
 
 	@Override
 	public String getResult() {

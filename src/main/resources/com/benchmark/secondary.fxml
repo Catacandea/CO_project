@@ -15,26 +15,51 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Century Gothic;" text="Results ..." />
-            <Text fill="#08175b" fontSmoothingType="LCD" layoutX="322.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Read">
+            <Text fill="#08175b" fontSmoothingType="LCD" layoutX="438.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="READ">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Text>
-            <Text fill="#08175b" fontSmoothingType="LCD" layoutX="421.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Write">
+            <Text fill="#08175b" fontSmoothingType="LCD" layoutX="305.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WRITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
-            <Text fill="#08175b" fontSmoothingType="LCD" layoutX="250.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SEQ">
+            <Text fill="#08175b" fontSmoothingType="LCD" layoutX="226.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SEQ">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
-            <Text fill="#08175b" fontSmoothingType="LCD" layoutX="250.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RND">
+            <Text fill="#08175b" fontSmoothingType="LCD" layoutX="223.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RND">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
+            <Label fx:id="seqWrite" layoutX="287.0" layoutY="111.0" prefHeight="21.0" prefWidth="93.0" textFill="#08175b">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Label>
+            <Label fx:id="seqRead" layoutX="401.0" layoutY="111.0" prefHeight="21.0" prefWidth="105.0" textFill="#08175b">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Label>
+            <Label fx:id="rndWrite" layoutX="287.0" layoutY="179.0" prefHeight="21.0" prefWidth="92.0" textFill="#08175b">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Label>
+            <Label fx:id="rndRead" layoutX="416.0" layoutY="180.0" prefHeight="21.0" prefWidth="81.0" textFill="#08175b">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Label>
+            <Label layoutX="260.0" layoutY="253.0" prefHeight="21.0" prefWidth="250.0" style="-fx-background-color: #ebe8e8;" text="The sequential read value is not calculated">
+               <font>
+                  <Font name="System Italic" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="260.0" layoutY="274.0" prefHeight="21.0" prefWidth="251.0" style="-fx-background-color: #ebe8e8;" text="      correctly because of OS page cache." textAlignment="RIGHT">
+               <font>
+                  <Font name="System Italic" size="13.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </center>
@@ -42,7 +67,14 @@
       <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
    </top>
    <bottom>
-      <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="521.0" layoutY="10.0" mnemonicParsing="false" onAction="#switchBack" style="-fx-background-color: TRANSPARENT;" text="BACK" textFill="#08175b">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+         </children></AnchorPane>
    </bottom>
    <left>
       <AnchorPane prefHeight="300.0" prefWidth="50.0" BorderPane.alignment="CENTER" />
